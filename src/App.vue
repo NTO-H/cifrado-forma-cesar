@@ -14,14 +14,23 @@ export default {
 </script>
 
 <style>
-
-body{
-  margin: 0; /* Eliminar margen */
+body {
+  margin: 0;
+  /* display: flex; */
+  /* align-items: center;  */
+  /* Eliminar margen */
   padding: 0;
+  width: 100%;
+  
+  height: 100vh;
+
+  /* justify-content: center; */
 }
+
 #app {
-  /* border: dashed; */
-  background: linear-gradient(0deg, #E4E4E4FF 0%, #E4E4E4FF 50%, #ffffff 90%, #bd6ced 110%);  margin: 0;
+
+  display: flex;
+
   /* background: linear-gradient(0deg, #ffffff 0%, #9efdff 100%); */
 
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -32,5 +41,21 @@ body{
   /* margin-top: 60px; */
   margin: 0;
   padding: 0;
+  
 }
+
+@media screen and (max-width: 600px) {
+  #app {
+    background: linear-gradient(0deg, #FFFFFFFF 0%, #ffffff 50%, #ffffff 90%, #bd6ced 110%);
+    margin: 0;
+    width: 100%;
+    height: auto;
+   
+    body {
+  margin: 0;
+}
+  }
+
+}
+
 </style>

@@ -9,7 +9,7 @@
       <img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Caesar3.svg" alt="cifrado de cesar">
     </div> -->
     <!-- </div> -->
-    <a @click="toggleVerMas">
+    <!-- <a @click="toggleVerMas">
       {{ verMas ? 'Ocultar' : 'Ver más' }}
     </a>
     <div v-if="verMas" id="ver-mas" class="ver-mas">
@@ -19,7 +19,7 @@
       <div class="img-container">
         <img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Caesar3.svg" alt="cifrado de cesar" />
       </div>
-    </div>
+    </div> -->
 
 
     <div class="container">
@@ -31,11 +31,11 @@
         <div class="form-item">
           <input class="button" type="submit" value="Cifrar" />
         </div>
-      </form>
-      <p><b>Texto cifrado:</b>
+        <label class="r">Texto cifrado:</label>
         <span id="exe17response2" v-if="inputTextCifrar.length > 0">{{ cifradoOutput }}</span>
         <span v-else>Texto cifrado vacío</span>
-      </p>
+
+      </form>
       <div id="exe17response" hidden ref="containerDat"></div>
       <form @submit.prevent="onDecifrar" id="exer17">
         <div class="form-item">
@@ -45,12 +45,11 @@
         <div class="form-item">
           <input class="button" type="submit" value="decifrar" />
         </div>
-      </form>
-
-      <p><b>Texto decifrado:</b>
+        <label class="r">Texto decifrado:</label>
         <span id="exe17response2" v-if="inputTextDecifrar.length > 0">{{ decifradoOutput }}</span>
         <span v-else>Texto decifrado vacío</span>
-      </p>
+      </form>
+
       <div id="exe17response" hidden ref="containerDat1"></div>
 
       <div>
@@ -225,33 +224,53 @@ export default {
 
 <style>
 .container {
-  border: 1px solid #dcdcdc;
-  border-radius: 10px;
-  box-shadow: 0px 5px 16px 5px rgb(217, 217, 217);
-  /* padding: 50px; */
-  margin-bottom: 10px;
-  z-index: 1;
-  background-color: #ffffff;
-  /* transition: transform 0.09s linear, opacity 1s ease-in-out;
-  transform: scale(0.9);
-  &:hover{
-    transform: scale(1);
-  } */
+  width: 100%;
+  /* Fijar el ancho */
+  height: auto;
+  gap:10px;
+  /* gap: 10px; */
+  /* Fijar la altura */
+  /* border: 1px solid #dcdcdc; */
+  /* box-shadow: 0px 5px 16px 5px rgb(217, 217, 217); */
+  /* background-color: #ffffff; */
+  margin: 0 auto;
+  /* Centra horizontalmente */
+  display: flex;
+  /* flex-direction: row; */
+  flex-wrap: wrap;
+  justify-content: center;
+  /* Centra verticalmente el contenido */
+  align-items: self-start;
+  /* Centra horizontalmente el contenido */
+  /* border: dashed; */
+  /* padding: 10px; */
+
+  form {
+   
+    border-radius: 10px;
+    border: dashed;
+    background-color: #ffffff;
+    border: 1px solid #B1FFB0FF;
+    /* border-radius: 10px; */
+    box-shadow: 0px 5px 16px 5px rgb(217, 217, 217);
+  }
 }
 
-.ver-mas {
+.r {
+  border-radius: 3px;
+  padding: 4px;
+  color: #008c5f;
+  background-color: #dbffd0;
+}
+
+.ver-mas {margin: 0 auto;
+  width: 100%;
   border-radius: 10px;
-  padding: 10px;
+  padding: 15px; /* Padding para pantallas grandes */
   box-shadow: 0px 4px 5px 4px rgb(239, 239, 239);
-  /* background-color: #FEFEEFFF; */
   background: linear-gradient(0deg, #FFF7D3FF 0%, #FFFFFFFF 100%);
   margin-bottom: 10px;
-  /* transition: transform 0.09s linear, opacity 1s ease-in-out; */
-  transform: scale(0.9);
-  /* &:hover{
-    transform: scale(1);
-
-  } */
+  transform: scale(1); /* Escala normal en pantallas grandes */
 }
 
 a {
@@ -261,16 +280,16 @@ a {
 
 .all {
   /* max-width: 1200px; */
-  padding: 14px;
+  /* padding: 14px; */
   width: 100%;
   /* Ocupar todo el ancho */
-  height: 100%;
+  height: auto;
+  /* margin: 0; */
   /* Ocupar toda la altura del contenedor padre */
   box-sizing: border-box;
   /* Incluir padding y border dentro de las dimensiones */
 
   /* padding: 20px; */
-  box-sizing: border-box;
 }
 
 h2 {
@@ -285,23 +304,14 @@ p {
   text-align: justify;
 }
 
-.img-container {
-  text-align: center;
-  margin: 20px 0;
-}
 
-.img-container img {
-  max-width: 80%;
-  height: auto;
-  /* border: 2px solid #ccc; */
-  /* border-radius: 8px; */
-}
+
 
 form {
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  padding: 10px;
+  gap: 20px;
+  padding: 20px;
 }
 
 .form-item {
@@ -315,11 +325,12 @@ form {
   align-items: start;
   margin-bottom: 5px;
 
+
   font-size: 1.2em;
 }
 
 input[type="text"] {
-  padding: 20px;
+  padding: 10px;
   font-size: 1.1em;
   background-color: #F0F0F0FF;
   /* container: 'Ingrese el texto'; */
@@ -329,7 +340,6 @@ input[type="text"] {
 }
 
 .button {
-  padding: 15px 20px;
   font-size: 1.2em;
   color: #9c31d9;
   background-color: white;
@@ -367,7 +377,7 @@ input[type="text"] {
   }
 
   p {
-    font-size: 1em;
+    font-size: 12px;
   }
 
   input[type="text"] {
@@ -386,14 +396,11 @@ input[type="text"] {
 }
 
 /* For smaller devices like phones */
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 600px) {
   h2 {
     font-size: 1.2em;
   }
 
-  p {
-    font-size: 0.9em;
-  }
 
   input[type="text"] {
     font-size: 0.9em;
@@ -403,6 +410,28 @@ input[type="text"] {
   .button {
     font-size: 0.9em;
     padding: 6px 12px;
+  }
+
+  .container {
+    width: 80%;
+    form{
+      width: 100%;
+    }
+    /* Fijar el ancho */
+    /* flex-direction: column; */
+
+  }
+
+  .ver-mas {
+    padding: 10px; /* Reducimos más el padding para pantallas pequeñas */
+    transform: scale(0.9); /* Escalamos ligeramente para que se vea mejor en pantallas pequeñas */
+  }
+
+  .img-container {
+    padding: 10px; /* Ajustamos el padding de la imagen */
+    img{
+      width: 100%;
+    }
   }
 
   #exe17response2,
