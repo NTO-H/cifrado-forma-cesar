@@ -15,16 +15,17 @@ export default {
 
 <style>
 body {
+  background-color: #fff1e2;
   margin: 0;
-  /* display: flex; */
-  /* align-items: center;  */
+  display: flex;
+  align-items: center; 
   /* Eliminar margen */
   padding: 0;
   width: 100%;
   
   height: 100vh;
 
-  /* justify-content: center; */
+  justify-content: center;
 }
 
 #app {
@@ -46,7 +47,7 @@ body {
 
 @media screen and (max-width: 600px) {
   #app {
-    background: linear-gradient(0deg, #FFFFFFFF 0%, #ffffff 50%, #ffffff 90%, #bd6ced 110%);
+    background: linear-gradient(0deg, #FFFFFFFF 0%, #ffffff 50%, #ffffff 90%, #B1FFB0FF 110%);
     margin: 0;
     width: 100%;
     height: auto;

@@ -1,6 +1,6 @@
 <template>
   <div class="all">
-    <h2>Cifrado de César</h2>
+    <h2>Cifrado de César con Vue</h2>
     <!-- <div class="" v-else-if="" id="ver-mas">
     <p>
       En criptografía, el cifrado César, también conocido como cifrado por desplazamiento...
@@ -27,13 +27,17 @@
         <div class="form-item">
           <label for="txt">Texto: a cifrar</label>
           <input type="text" placeholder="Ingrese el texto" v-model="inputTextCifrar" id="txt" />
+          <span class="err"  v-if="inputTextCifrar.length == 0">campo vacío</span>
+
+
         </div>
         <div class="form-item">
           <input class="button" type="submit" value="Cifrar" />
+          
         </div>
         <label class="r">Texto cifrado:</label>
         <span id="exe17response2" v-if="inputTextCifrar.length > 0">{{ cifradoOutput }}</span>
-        <span v-else>Texto cifrado vacío</span>
+        <span v-else class="err">Texto cifrado vacío</span>
 
       </form>
       <div id="exe17response" hidden ref="containerDat"></div>
@@ -41,13 +45,15 @@
         <div class="form-item">
           <label for="txt">Texto: a decifrar</label>
           <input type="text" placeholder="Ingrese el texto" v-model="inputTextDecifrar" id="txt" />
+        <span class="err"  v-if="inputTextDecifrar.length == 0">campo vacío</span>
+
         </div>
         <div class="form-item">
           <input class="button" type="submit" value="decifrar" />
         </div>
         <label class="r">Texto decifrado:</label>
         <span id="exe17response2" v-if="inputTextDecifrar.length > 0">{{ decifradoOutput }}</span>
-        <span v-else>Texto decifrado vacío</span>
+        <span v-else class="err">Texto decifrado vacío</span>
       </form>
 
       <div id="exe17response" hidden ref="containerDat1"></div>
@@ -239,8 +245,9 @@ export default {
   /* flex-direction: row; */
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
   /* Centra verticalmente el contenido */
-  align-items: self-start;
+  /* align-items: self-start; */
   /* Centra horizontalmente el contenido */
   /* border: dashed; */
   /* padding: 10px; */
@@ -252,7 +259,7 @@ export default {
     background-color: #ffffff;
     border: 1px solid #B1FFB0FF;
     /* border-radius: 10px; */
-    box-shadow: 0px 5px 16px 5px rgb(217, 217, 217);
+    box-shadow: 0px 5px 16px 5px #1010104B;
   }
 }
 
@@ -282,6 +289,7 @@ a {
   /* max-width: 1200px; */
   /* padding: 14px; */
   width: 100%;
+  margin-top: -125px;
   /* Ocupar todo el ancho */
   height: auto;
   /* margin: 0; */
@@ -295,12 +303,18 @@ a {
 h2 {
   text-align: center;
   font-size: 2em;
-  color: #313131FF;
+  color: #008c5f;
 }
 
 p {
   font-size: 1.2em;
   line-height: 1.6;
+  text-align: justify;
+}
+.err {
+  font-size: 12px;
+  /* line-height: 1.6; */
+  color:red;
   text-align: justify;
 }
 
@@ -337,7 +351,11 @@ input[type="text"] {
   border: 1px solid #e7e7e7;
   border-radius: 2px;
   color: #008c5f;
-}
+  }
+  input[type="text"]:focus{
+    border: 1px solid #B1FFB0FF;
+
+  }
 
 .button {
   font-size: 1.2em;
@@ -401,7 +419,10 @@ input[type="text"] {
     font-size: 1.2em;
   }
 
+.all{
+  margin-top: 0;
 
+}
   input[type="text"] {
     font-size: 0.9em;
     padding: 8px;
