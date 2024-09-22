@@ -1,59 +1,56 @@
 <template>
   <div class="all">
     <h2>Cifrado de César con Vue</h2>
-    <!-- <div class="" v-else-if="" id="ver-mas">
-    <p>
-      En criptografía, el cifrado César, también conocido como cifrado por desplazamiento...
-    </p>
-    <div class="img-container">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Caesar3.svg" alt="cifrado de cesar">
-    </div> -->
-    <!-- </div> -->
-    <!-- <a @click="toggleVerMas">
-      {{ verMas ? 'Ocultar' : 'Ver más' }}
-    </a>
-    <div v-if="verMas" id="ver-mas" class="ver-mas">
-      <p>
-        En criptografía, el cifrado César, también conocido como cifrado por desplazamiento...
-      </p>
-      <div class="img-container">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Caesar3.svg" alt="cifrado de cesar" />
-      </div>
-    </div> -->
-
 
     <div class="container">
       <form @submit.prevent="onSubmit" id="exer17">
         <div class="form-item">
           <label for="txt">Texto: a cifrar</label>
           <input type="text" placeholder="Ingrese el texto" v-model="inputTextCifrar" id="txt" />
-          <span class="err"  v-if="inputTextCifrar.length == 0">campo vacío</span>
+          <span class="err" v-if="inputTextCifrar.length == 0">campo vacío</span>
 
 
         </div>
         <div class="form-item">
           <input class="button" type="submit" value="Cifrar" />
-          
+
         </div>
         <label class="r">Texto cifrado:</label>
-        <span id="exe17response2" v-if="inputTextCifrar.length > 0">{{ cifradoOutput }}</span>
+        <span id="exe17response2" class="text-res" v-if="inputTextCifrar.length > 0">
+          {{ cifradoOutput }}
+         <!-- Icono cambia entre fa-copy y fa-check dependiendo si fue copiado -->
+         <i :class="[copied ? 'pi pi-check' : 'pi pi-copy']"
+         @click="copiarTextoCifrado"
+         style="cursor: pointer; margin-right: 10px;"
+         @mouseenter="showTooltip = true"
+         @mouseleave="showTooltip = false"></i>
+          <span v-if="showTooltip" class="tooltip">{{ copied ? 'Copied!' : 'Copy' }}</span>
+        </span>
         <span v-else class="err">Texto cifrado vacío</span>
-
       </form>
       <div id="exe17response" hidden ref="containerDat"></div>
       <form @submit.prevent="onDecifrar" id="exer17">
         <div class="form-item">
           <label for="txt">Texto: a decifrar</label>
           <input type="text" placeholder="Ingrese el texto" v-model="inputTextDecifrar" id="txt" />
-        <span class="err"  v-if="inputTextDecifrar.length == 0">campo vacío</span>
+          <span class="err" v-if="inputTextDecifrar.length == 0">campo vacío</span>
 
         </div>
         <div class="form-item">
           <input class="button" type="submit" value="decifrar" />
         </div>
         <label class="r">Texto decifrado:</label>
-        <span id="exe17response2" v-if="inputTextDecifrar.length > 0">{{ decifradoOutput }}</span>
+        <span id="exe17response2" v-if="inputTextDecifrar.length > 0">{{ decifradoOutput }} 
+          <i :class="[copiedDecifrado ? 'pi pi-check' : 'pi pi-copy']"
+         @click="copiarTextoDecifrado"
+         style="cursor: pointer; margin-right: 10px;"
+         @mouseenter="showTooltipD = true"
+         @mouseleave="showTooltipD = false"></i>
+         <span v-if="showTooltipD" class="tooltip">{{ copiedDecifrado ? 'Copied!' : 'Copy' }}</span>
+
+        </span>
         <span v-else class="err">Texto decifrado vacío</span>
+
       </form>
 
       <div id="exe17response" hidden ref="containerDat1"></div>
@@ -69,9 +66,25 @@
 </template>
 
 <script>
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faCopy, faCheckCircle } from '@fortawesome/free-regular-svg-icons';
+// import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import 'primeicons/primeicons.css';
+// Agregar los iconos a la librería
+library.add(faCopy, faCheckCircle);
+
+// import Message from 'primevue/message';
 export default {
+components: {
+    // FontAwesomeIcon
+  },
   data() {
-    return {
+    return {  
+      copied: false, // Para controlar si ya se copió el texto
+      copiedDecifrado: false, // Para controlar si ya se copió el texto
+      showTooltip: false, // Controlar el estado del tooltip
+      showTooltipD: false // Controlar el estado del tooltip
+    ,
       count: 0,
       inputText: '',
       printedLetters: [], // Para mostrar el texto cifrado en pantalla
@@ -97,9 +110,29 @@ export default {
       // this.inputText = ''; // Limpiar el campo de entrada
 
     },
-
-
-
+    copiarTextoDecifrado() {
+      const textToCopy = this.decifradoOutput;
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        this.copiedDecifrado = true; // Cambia el estado a copiado
+        setTimeout(() => {
+          this.copiedDecifrado = false; // Cambia el icono de nuevo después de 2 segundos
+        }, 2000);
+      }).catch(err => {
+        console.error('Error al copiar texto: ', err);
+      });
+    },
+    copiarTextoCifrado() {
+      const textToCopy = this.cifradoOutput;
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        this.copied = true; // Cambia el estado a copiado
+        setTimeout(() => {
+          this.copied = false; // Cambia el icono de nuevo después de 2 segundos
+        }, 2000);
+      }).catch(err => {
+        console.error('Error al copiar texto: ', err);
+      });
+    }
+  ,
     onSubmit() {
       this.cifradoOutput = '';
       this.printedLetters = []; // Reset printed letters
@@ -229,11 +262,48 @@ export default {
 </script>
 
 <style>
+.tooltip {
+  position: absolute;
+  background-color: #333;
+  color: #fff;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 0.8em;
+  transform: translateX(-100%); /* Para que el tooltip aparezca a la izquierda */
+  margin-right: 10px;
+}
+.pi-check{
+  /* padding: 5px; */
+color: blue;
+/* border: 1px solid blue; */
+}
+#exe17response2,
+#exe17txtNormal {
+  background-color: #F6FFF3FF;
+  color: #1C1C1CFF;
+  border: 1px solid #B1FFB0FF;
+
+  padding: 10px;
+  font-size: 1.2em;
+  font-weight: bold;
+  /* border: dashed; */
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Responsive */
+@media screen and (max-width: 600px) {
+  #exe17response2 font-awesome-icon {
+    font-size: 1em;
+    /* Ajusta el tamaño del ícono en pantallas pequeñas */
+  }
+}
+
 .container {
   width: 100%;
   /* Fijar el ancho */
   height: auto;
-  gap:10px;
+  gap: 10px;
   /* gap: 10px; */
   /* Fijar la altura */
   /* border: 1px solid #dcdcdc; */
@@ -253,7 +323,7 @@ export default {
   /* padding: 10px; */
 
   form {
-   
+
     border-radius: 10px;
     border: dashed;
     background-color: #ffffff;
@@ -270,14 +340,17 @@ export default {
   background-color: #dbffd0;
 }
 
-.ver-mas {margin: 0 auto;
+.ver-mas {
+  margin: 0 auto;
   width: 100%;
   border-radius: 10px;
-  padding: 15px; /* Padding para pantallas grandes */
+  padding: 15px;
+  /* Padding para pantallas grandes */
   box-shadow: 0px 4px 5px 4px rgb(239, 239, 239);
   background: linear-gradient(0deg, #FFF7D3FF 0%, #FFFFFFFF 100%);
   margin-bottom: 10px;
-  transform: scale(1); /* Escala normal en pantallas grandes */
+  transform: scale(1);
+  /* Escala normal en pantallas grandes */
 }
 
 a {
@@ -311,10 +384,11 @@ p {
   line-height: 1.6;
   text-align: justify;
 }
+
 .err {
   font-size: 12px;
   /* line-height: 1.6; */
-  color:red;
+  color: red;
   text-align: justify;
 }
 
@@ -351,11 +425,12 @@ input[type="text"] {
   border: 1px solid #e7e7e7;
   border-radius: 2px;
   color: #008c5f;
-  }
-  input[type="text"]:focus{
-    border: 1px solid #B1FFB0FF;
+}
 
-  }
+input[type="text"]:focus {
+  border: 1px solid #B1FFB0FF;
+
+}
 
 .button {
   font-size: 1.2em;
@@ -419,10 +494,11 @@ input[type="text"] {
     font-size: 1.2em;
   }
 
-.all{
-  margin-top: 0;
+  .all {
+    margin-top: 0;
 
-}
+  }
+
   input[type="text"] {
     font-size: 0.9em;
     padding: 8px;
@@ -435,22 +511,28 @@ input[type="text"] {
 
   .container {
     width: 80%;
-    form{
+
+    form {
       width: 100%;
     }
+
     /* Fijar el ancho */
     /* flex-direction: column; */
 
   }
 
   .ver-mas {
-    padding: 10px; /* Reducimos más el padding para pantallas pequeñas */
-    transform: scale(0.9); /* Escalamos ligeramente para que se vea mejor en pantallas pequeñas */
+    padding: 10px;
+    /* Reducimos más el padding para pantallas pequeñas */
+    transform: scale(0.9);
+    /* Escalamos ligeramente para que se vea mejor en pantallas pequeñas */
   }
 
   .img-container {
-    padding: 10px; /* Ajustamos el padding de la imagen */
-    img{
+    padding: 10px;
+
+    /* Ajustamos el padding de la imagen */
+    img {
       width: 100%;
     }
   }
