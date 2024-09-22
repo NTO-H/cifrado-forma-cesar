@@ -18,11 +18,11 @@ body {
   background-color: #fff1e2;
   margin: 0;
   display: flex;
-  align-items: center; 
+  align-items: center;
   /* Eliminar margen */
   padding: 0;
   width: 100%;
-  
+
   height: 100vh;
 
   justify-content: center;
@@ -42,7 +42,7 @@ body {
   /* margin-top: 60px; */
   margin: 0;
   padding: 0;
-  
+
 }
 
 @media screen and (max-width: 600px) {
@@ -50,13 +50,12 @@ body {
     background: linear-gradient(0deg, #FFFFFFFF 0%, #ffffff 50%, #ffffff 90%, #B1FFB0FF 110%);
     margin: 0;
     width: 100%;
-    height: auto;
-   
+    height: 100vh;
+
     body {
-  margin: 0;
-}
+      margin: 0;
+    }
   }
 
 }
-
 </style>
