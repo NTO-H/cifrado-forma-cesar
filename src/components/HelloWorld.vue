@@ -18,12 +18,10 @@
         <label class="r">Texto cifrado:</label>
         <span id="exe17response2" class="text-res" v-if="inputTextCifrar.length > 0">
           {{ cifradoOutput }}
-         <!-- Icono cambia entre fa-copy y fa-check dependiendo si fue copiado -->
-         <i :class="[copied ? 'pi pi-check' : 'pi pi-copy']"
-         @click="copiarTextoCifrado"
-         style="cursor: pointer; margin-right: 10px;"
-         @mouseenter="showTooltip = true"
-         @mouseleave="showTooltip = false"></i>
+          <!-- Icono cambia entre fa-copy y fa-check dependiendo si fue copiado -->
+          <i :class="[copied ? 'pi pi-check' : 'pi pi-copy']" @click="copiarTextoCifrado"
+            style="cursor: pointer; margin-right: 10px;" @mouseenter="showTooltip = true"
+            @mouseleave="showTooltip = false"></i>
           <span v-if="showTooltip" class="tooltip">{{ copied ? 'Copied!' : 'Copy' }}</span>
         </span>
         <span v-else class="err">Texto cifrado vacío</span>
@@ -40,13 +38,11 @@
           <input class="button" type="submit" value="decifrar" />
         </div>
         <label class="r">Texto decifrado:</label>
-        <span id="exe17response2" v-if="inputTextDecifrar.length > 0">{{ decifradoOutput }} 
-          <i :class="[copiedDecifrado ? 'pi pi-check' : 'pi pi-copy']"
-         @click="copiarTextoDecifrado"
-         style="cursor: pointer; margin-right: 10px;"
-         @mouseenter="showTooltipD = true"
-         @mouseleave="showTooltipD = false"></i>
-         <span v-if="showTooltipD" class="tooltip">{{ copiedDecifrado ? 'Copied!' : 'Copy' }}</span>
+        <span id="exe17response2" v-if="inputTextDecifrar.length > 0">{{ decifradoOutput }}
+          <i :class="[copiedDecifrado ? 'pi pi-check' : 'pi pi-copy']" @click="copiarTextoDecifrado"
+            style="cursor: pointer; margin-right: 10px;" @mouseenter="showTooltipD = true"
+            @mouseleave="showTooltipD = false"></i>
+          <span v-if="showTooltipD" class="tooltip">{{ copiedDecifrado ? 'Copied!' : 'Copy' }}</span>
 
         </span>
         <span v-else class="err">Texto decifrado vacío</span>
@@ -75,16 +71,16 @@ library.add(faCopy, faCheckCircle);
 
 // import Message from 'primevue/message';
 export default {
-components: {
+  components: {
     // FontAwesomeIcon
   },
   data() {
-    return {  
+    return {
       copied: false, // Para controlar si ya se copió el texto
       copiedDecifrado: false, // Para controlar si ya se copió el texto
       showTooltip: false, // Controlar el estado del tooltip
       showTooltipD: false // Controlar el estado del tooltip
-    ,
+      ,
       count: 0,
       inputText: '',
       printedLetters: [], // Para mostrar el texto cifrado en pantalla
@@ -132,7 +128,7 @@ components: {
         console.error('Error al copiar texto: ', err);
       });
     }
-  ,
+    ,
     onSubmit() {
       this.cifradoOutput = '';
       this.printedLetters = []; // Reset printed letters
@@ -269,14 +265,17 @@ components: {
   padding: 5px;
   border-radius: 5px;
   font-size: 0.8em;
-  transform: translateX(-100%); /* Para que el tooltip aparezca a la izquierda */
+  transform: translateX(-100%);
+  /* Para que el tooltip aparezca a la izquierda */
   margin-right: 10px;
 }
-.pi-check{
+
+.pi-check {
   /* padding: 5px; */
-color: blue;
-/* border: 1px solid blue; */
+  color: blue;
+  /* border: 1px solid blue; */
 }
+
 #exe17response2,
 #exe17txtNormal {
   background-color: #F6FFF3FF;
@@ -359,6 +358,8 @@ a {
 }
 
 .all {
+  font-size: large;
+  font-family: Arial, Helvetica, sans-serif;
   /* max-width: 1200px; */
   /* padding: 14px; */
   width: 100%;
@@ -502,6 +503,11 @@ input[type="text"]:focus {
   input[type="text"] {
     font-size: 0.9em;
     padding: 8px;
+  }
+
+  input[type="text"]:focus {
+    border-color: green;
+    /* cambia el color del borde a verde cuando el input está seleccionado */
   }
 
   .button {
