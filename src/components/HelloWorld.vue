@@ -425,15 +425,17 @@ input[type="text"] {
   /* container: 'Ingrese el texto'; */
   border: 1px solid #e7e7e7;
   border-radius: 2px;
+  outline: none;
   color: #008c5f;
+  height: 25px;
 }
-
 input[type="text"]:focus {
-  border: 1px solid #B1FFB0FF;
+  border: 1px solid rgb(176, 255, 226);
 
 }
 
 .button {
+  height: 40px;
   font-size: 1.2em;
   color: #9c31d9;
   background-color: white;
