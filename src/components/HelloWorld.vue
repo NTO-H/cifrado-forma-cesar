@@ -59,8 +59,8 @@
       <div id="exe17response" hidden ref="containerDat1"></div>
       <div>
       </div>
-      <span class="clearAll">
-        <i :class="'pi pi-eraser'" @click="clearInputs" style="cursor: pointer; margin-right: 10px;"
+      <span  @click="clearInputs" class="clearAll">
+        <i :class="'pi pi-eraser'" style="cursor: pointer; margin-right: 10px;"
           @mouseenter="showTooltipEraser = true" @mouseleave="showTooltipEraser = false"></i> Limpiar todo
         <span v-if="showTooltipEraser" class="tooltip">Limpiar Campos</span>
       </span>
