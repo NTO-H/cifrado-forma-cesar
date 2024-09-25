@@ -307,13 +307,14 @@ export default {
 }
 
 .clearAll {
-  width: 100%;
+  width: 70%;
   background-color: #ecfef9;
   border: #9dffe0 solid 1px;
   color: #707070;
   border-radius: 5px;
   padding: 10px;
   cursor: pointer;
+
 
   &:hover {
     color: #008c5f;
@@ -375,10 +376,14 @@ export default {
   display: flex;
 flex-direction: row;
 margin: 10px;
+flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  /* border: dashed; */
   form {
+    width: 80%;
     
     border-radius: 10px;
-    border: dashed;
     background-color: #ffffff;
     border: 1px solid #B1FFB0FF;
     /* border-radius: 10px; */
@@ -497,7 +502,6 @@ input[type="text"]:focus {
   background-color: white;
   border: none;
   border: 1px solid #f6e5ff;
-
   border-radius: 2px;
   cursor: pointer;
 }
@@ -573,13 +577,12 @@ input[type="text"]:focus {
   .container {
     width: 90%;
 
-    form {
-      width: 100%;
+    .container-forms{
+      display: flex;
+      width: 80%;
+      flex-direction: column;
+       
     }
-  .container-forms{
-display: flex;
-flex-direction: column;
-}
     /* Fijar el ancho */
     /* flex-direction: column; */
 
