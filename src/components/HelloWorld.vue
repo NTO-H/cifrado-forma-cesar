@@ -423,7 +423,7 @@ a {
   /* max-width: 1200px; */
   /* padding: 14px; */
   width: 100%;
-  margin-top: -125px;
+  
   /* Ocupar todo el ancho */
   height: auto;
   /* margin: 0; */
