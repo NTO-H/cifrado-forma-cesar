@@ -78,9 +78,9 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCopy, faCheckCircle } from '@fortawesome/free-regular-svg-icons';
 // import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import 'primeicons/primeicons.css';
-import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
+// import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 // Agregar los iconos a la librería
-library.add(faCopy, faCheckCircle, faPlus, faMinus);
+library.add(faCopy, faCheckCircle);
 
 
 // import Message from 'primevue/message';
