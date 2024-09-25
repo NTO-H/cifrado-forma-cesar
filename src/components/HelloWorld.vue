@@ -1,7 +1,6 @@
 <template>
   <div class="all">
     <h2>Cifrado de César con Vue</h2>
-
     <div class="container">
       <form @submit.prevent="onSubmit" id="exer17">
         <div class="form-item">
@@ -46,9 +45,7 @@
 
         </span>
         <span v-else class="err">Texto decifrado vacío</span>
-
       </form>
-
       <div id="exe17response" hidden ref="containerDat1"></div>
 
       <div>
