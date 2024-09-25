@@ -2,17 +2,28 @@
   <div class="all">
     <h2>Cifrado de César con Vue</h2>
     <div class="container">
+      <div class="input-container">
+        <label for="amount" class="font-bold block mb-2">número de desplazamiento</label>
+        <div class="input-number">
+          <button class="decrement-button" @click="decrement">
+            <!-- :class="'pi pi-eraser'" -->
+            <i :class="'pi pi-minus'"></i>
+          </button>
+          <input v-model="value" id="amount" type="text" readonly />
+          <button class="increment-button" @click="increment">
+            <i :class="'pi pi-plus'"></i>
+          </button>
+        </div>
+      </div>
+
       <form @submit.prevent="onSubmit" id="exer17">
         <div class="form-item">
           <label for="txt">Texto: a cifrar</label>
           <input type="text" placeholder="Ingrese el texto" v-model="inputTextCifrar" id="txt" />
           <span class="err" v-if="inputTextCifrar.length == 0">campo vacío</span>
-
-
         </div>
         <div class="form-item">
           <input class="button" type="submit" value="Cifrar" />
-
         </div>
         <label class="r">Texto cifrado:</label>
         <span id="exe17response2" class="text-res" v-if="inputTextCifrar.length > 0">
@@ -42,29 +53,35 @@
             style="cursor: pointer; margin-right: 10px;" @mouseenter="showTooltipD = true"
             @mouseleave="showTooltipD = false"></i>
           <span v-if="showTooltipD" class="tooltip">{{ copiedDecifrado ? 'Copied!' : 'Copy' }}</span>
-
         </span>
         <span v-else class="err">Texto decifrado vacío</span>
       </form>
       <div id="exe17response" hidden ref="containerDat1"></div>
-
       <div>
       </div>
+      <span class="clearAll">
+        <i :class="'pi pi-eraser'" @click="clearInputs" style="cursor: pointer; margin-right: 10px;"
+          @mouseenter="showTooltipEraser = true" @mouseleave="showTooltipEraser = false"></i> Limpiar todo
+        <span v-if="showTooltipEraser" class="tooltip">Limpiar Campos</span>
+      </span>
+      <!-- <i :class="" -->
+      <!-- <input class="button" type="submit" value="decifrar" /> -->
+
     </div>
   </div>
-
-
-
-
 </template>
 
 <script>
+
+import 'primeicons/primeicons.css'
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCopy, faCheckCircle } from '@fortawesome/free-regular-svg-icons';
 // import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import 'primeicons/primeicons.css';
+import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 // Agregar los iconos a la librería
-library.add(faCopy, faCheckCircle);
+library.add(faCopy, faCheckCircle, faPlus, faMinus);
+
 
 // import Message from 'primevue/message';
 export default {
@@ -76,7 +93,8 @@ export default {
       copied: false, // Para controlar si ya se copió el texto
       copiedDecifrado: false, // Para controlar si ya se copió el texto
       showTooltip: false, // Controlar el estado del tooltip
-      showTooltipD: false // Controlar el estado del tooltip
+      showTooltipD: false,// Controlar el estado del tooltip
+      value: 0
       ,
       count: 0,
       inputText: '',
@@ -91,6 +109,14 @@ export default {
     };
   },
   methods: {
+    increment() {
+      this.value = parseFloat(this.value) +1;
+    },
+    decrement() {
+      if (this.value > 0) {
+        this.value = parseFloat(this.value) - 1;
+      }
+    },
 
     toggleVerMas() {
       this.verMas = !this.verMas;
@@ -99,9 +125,17 @@ export default {
       // alert("decifrado")
       this.decifradoOutput = '';
       this.mostrarLetrasDecifradas = []; // Reset printed letters
-      this.decifradoCesar(this.inputTextDecifrar, this.alfabeto, -5);
+      this.decifradoCesar(this.inputTextDecifrar, this.alfabeto, -this.value);
       // this.inputText = ''; // Limpiar el campo de entrada
 
+    },
+    clearInputs() {
+      this.inputTextCifrar = '';
+      this.inputTextDecifrar = '';
+      this.cifradoOutput = '';
+      this.decifradoOutput = '';
+      this.printedLetters = [];
+      this.mostrarLetrasDecifradas = [];
     },
     copiarTextoDecifrado() {
       const textToCopy = this.decifradoOutput;
@@ -129,7 +163,7 @@ export default {
     onSubmit() {
       this.cifradoOutput = '';
       this.printedLetters = []; // Reset printed letters
-      this.cifradoCesar(this.inputTextCifrar, this.alfabeto, 5);
+      this.cifradoCesar(this.inputTextCifrar, this.alfabeto, this.value);
       // this.inputText = ''; // Limpiar el campo de entrada
 
 
@@ -265,6 +299,27 @@ export default {
   transform: translateX(-100%);
   /* Para que el tooltip aparezca a la izquierda */
   margin-right: 10px;
+}
+
+.container {
+
+  box-shadow: 0px 0px 5px 5px #d6d6d64b;
+
+  background-color: #eeeeee;
+}
+
+.clearAll {
+  width: 100%;
+  background-color: #ecfef9;
+  border: #9dffe0 solid 1px;
+  color: #707070;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+
+  &:hover {
+    color: #008c5f;
+  }
 }
 
 .pi-check {
@@ -426,6 +481,7 @@ input[type="text"] {
   color: #008c5f;
   height: 25px;
 }
+
 input[type="text"]:focus {
   border: 1px solid rgb(176, 255, 226);
 
@@ -461,9 +517,6 @@ input[type="text"]:focus {
 
 /* Responsive design for mobile devices */
 @media screen and (max-width: 768px) {
-  .container {
-    padding: 10px;
-  }
 
   h2 {
     font-size: 1.5em;
@@ -515,7 +568,7 @@ input[type="text"]:focus {
   }
 
   .container {
-    width: 80%;
+    width: 90%;
 
     form {
       width: 100%;
@@ -546,5 +599,61 @@ input[type="text"]:focus {
   #exe17txtNormal {
     font-size: 0.9em;
   }
+}
+
+
+
+/*  */
+.input-container {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+
+.input-number {
+  background-color: #f6e0ff;
+  display: flex;
+  align-items: center;
+  border: 1px solid #e3d3e6;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+input {
+  border: none;
+  text-align: center;
+  width: 100%;
+  padding: 8px;
+  font-size: 1.2em;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.decrement-button,
+.increment-button {
+
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.decrement-button i,
+.increment-button i {
+  font-size: 1.2em;
+  color: #9000ff;
+  &:focus{
+  color: red;
+  }
+}
+
+button:focus {
+  outline: none;
 }
 </style>
