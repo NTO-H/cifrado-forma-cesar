@@ -15,7 +15,6 @@
         </div>
       </div>
       <div class="container-forms">
-
         
         <form @submit.prevent="onSubmit" id="exer17">
         <div class="form-item">
