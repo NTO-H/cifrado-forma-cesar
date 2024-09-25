@@ -9,7 +9,7 @@
             <!-- :class="'pi pi-eraser'" -->
             <i :class="'pi pi-minus'"></i>
           </button>
-          <input v-model="value" id="amount" type="text" readonly />
+          <input class="desplazamiento" v-model="value" id="amount" type="text" readonly />
           <button class="increment-button" @click="increment">
             <i :class="'pi pi-plus'"></i>
           </button>
@@ -94,7 +94,7 @@ export default {
       copiedDecifrado: false, // Para controlar si ya se copió el texto
       showTooltip: false, // Controlar el estado del tooltip
       showTooltipD: false,// Controlar el estado del tooltip
-      value: 0
+      value: 5
       ,
       count: 0,
       inputText: '',
@@ -619,7 +619,7 @@ input[type="text"]:focus {
   overflow: hidden;
 }
 
-input {
+input.desplazamiento {
   border: none;
   text-align: center;
   width: 100%;
