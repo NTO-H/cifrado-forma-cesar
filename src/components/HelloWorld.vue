@@ -6,7 +6,6 @@
         <label for="amount" class="font-bold block mb-2">número de desplazamiento</label>
         <div class="input-number">
           <button class="decrement-button" @click="decrement">
-            <!-- :class="'pi pi-eraser'" -->
             <i :class="'pi pi-minus'"></i>
           </button>
           <input class="desplazamiento" v-model="value" id="amount" type="text" readonly />
@@ -15,8 +14,10 @@
           </button>
         </div>
       </div>
+      <div class="container-forms">
 
-      <form @submit.prevent="onSubmit" id="exer17">
+        
+        <form @submit.prevent="onSubmit" id="exer17">
         <div class="form-item">
           <label for="txt">Texto: a cifrar</label>
           <input type="text" placeholder="Ingrese el texto" v-model="inputTextCifrar" id="txt" />
@@ -56,6 +57,7 @@
         </span>
         <span v-else class="err">Texto decifrado vacío</span>
       </form>
+      </div>
       <div id="exe17response" hidden ref="containerDat1"></div>
       <div>
       </div>
@@ -64,9 +66,6 @@
           @mouseenter="showTooltipEraser = true" @mouseleave="showTooltipEraser = false"></i> Limpiar todo
         <span v-if="showTooltipEraser" class="tooltip">Limpiar Campos</span>
       </span>
-      <!-- <i :class="" -->
-      <!-- <input class="button" type="submit" value="decifrar" /> -->
-
     </div>
   </div>
 </template>
@@ -354,7 +353,6 @@ export default {
   width: 100%;
   /* Fijar el ancho */
   height: auto;
-  gap: 10px;
   /* gap: 10px; */
   /* Fijar la altura */
   /* border: 1px solid #dcdcdc; */
@@ -367,20 +365,26 @@ export default {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   /* Centra verticalmente el contenido */
   /* align-items: self-start; */
   /* Centra horizontalmente el contenido */
   /* border: dashed; */
   /* padding: 10px; */
-
+  .container-forms{
+  gap: 20px;
+  display: flex;
+flex-direction: row;
+margin: 10px;
   form {
-
+    
     border-radius: 10px;
     border: dashed;
     background-color: #ffffff;
     border: 1px solid #B1FFB0FF;
     /* border-radius: 10px; */
     box-shadow: 0px 5px 16px 5px #1010104B;
+  }
   }
 }
 
@@ -573,7 +577,10 @@ input[type="text"]:focus {
     form {
       width: 100%;
     }
-
+  .container-forms{
+display: flex;
+flex-direction: column;
+}
     /* Fijar el ancho */
     /* flex-direction: column; */
 
